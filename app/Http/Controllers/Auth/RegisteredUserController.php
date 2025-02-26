@@ -37,11 +37,13 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $roleId = Role::whereRaw('LOWER(name) = ?', 'client')->first()->id;
+        $RoleExists = Role::whereRaw('LOWER(name) = ?', 'client')->exists();
 
-        if (!$roleId) {
+        if (!$RoleExists) {
             $role = Role::create(['name' => 'client', 'description' => ' ']);
             $roleId = $role->id;
+        } else {
+            $roleId = Role::whereRaw('LOWER(name) = ?', 'client')->first()->id;
         }
 
         $user = User::create([

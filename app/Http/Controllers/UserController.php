@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
-use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,14 +46,12 @@ class UserController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function setRole(Request $request)
     {
-        $room = User::find($id);
+        $role = $request['role'];
 
-        $room->update([
-            'name' => $request['name'],
-            'role_id' => $request['role'],
-        ]);
+        User::where('id', $request['user'])->update(['role_id' => $request['role']]);
+
 
         return redirect('/admin/users')->with('success', 'User updated successfully!');
     }

@@ -38,14 +38,13 @@
             </div>
         </div>
 
-        <div class="flex-wrap justify-content-xl-center m-10 d-flex" style="width: 100%; gap: 20px">
+        <div class="flex-wrap justify-content-xl-center d-flex" style="width: 100%; gap: 20px">
             <table class="table table-hover table-bordered text-center align-middle">
                 <thead class="table-dark">
                 <tr>
                     <th scope="col">Role Name</th>
                     <th scope="col">Description</th>
                     <th scope="col">Users</th>
-                    <th scope="col" class="text-center">Actions</th>
                 </tr>
                 </thead>
                 <tbody class="table-light">
@@ -64,19 +63,6 @@
                             @else
                                 <span class="badge bg-secondary">No Users</span>
                             @endif
-                        </td>
-                        <td>
-                            <a href="{{ url('/admin/role/get/' . $role->id) }}" class="btn btn-sm btn-warning">
-                                <i class="bi bi-pencil"></i> Update
-                            </a>
-
-                            <form action="{{ url('/admin/role/delete/' . $role->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    <i class="bi bi-trash"></i> Delete
-                                </button>
-                            </form>
                         </td>
                     </tr>
                 @endforeach

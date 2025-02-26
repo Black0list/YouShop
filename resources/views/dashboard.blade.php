@@ -41,7 +41,13 @@
                     <i class="bi bi-briefcase me-2"></i>Users
                 </a>
                 <a href="/admin/roles" class="nav-link mb-2" onclick="setActive(this)">
-                    <i class="bi bi-tags me-2"></i>Roles
+                    <i class="bi bi-person-vcard-fill"></i>Roles
+                </a>
+                <a href="/admin/categories" class="nav-link mb-2" onclick="setActive(this)">
+                    <i class="bi bi-tags me-2"></i>Categories
+                </a>
+                <a href="/admin/subcategories" class="nav-link mb-2" onclick="setActive(this)">
+                    <i class="bi bi-tags me-2"></i>SubCategories
                 </a>
                 <a href="/admin/products" class="nav-link mb-2" onclick="setActive(this)">
                     <i class="bi bi-bag-plus-fill"></i>Products
@@ -50,20 +56,9 @@
                     <i class="bi bi-archive-fill"></i>Commands
                     <span class="badge bg-danger ms-2">3</span>
                 </a>
-                <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}" class="nav-link">
-                        @csrf
-
-                        <x-responsive-nav-link :href="route('logout')"
-                                               onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </x-responsive-nav-link>
-                    </form>
-{{--                    <a class="nav-link" href="/logout" onclick="return confirm('Are you sure you want to logout?')">--}}
-{{--                        <i class="bi bi-box-arrow-left"></i> Logout--}}
-{{--                    </a>--}}
-                </li>
+                <a href="/profile" class="nav-link mb-2" onclick="setActive(this)">
+                    <i class="bi bi-person-circle me-2"></i>Profile
+                </a>
             </nav>
         </div>
 
@@ -71,21 +66,24 @@
         <div class="col-md-10 p-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1>Tableau de bord</h1>
-                <div class="w-25">
-                    <input id="search" type="text" class="form-control" placeholder="Rechercher...">
+                <div class="relative">
+                    <button id="userMenuButton" class=" font-semibold focus:outline-1">Hello, {{ Auth::user()->name ?? 'Guest' }}</button>
+                    <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-gray-700 rounded-lg shadow-lg py-2">
+                        <a href="/profile" class="block px-4 py-2 font-semibold hover:bg-gray-600">Profile</a>
+                        <form method="POST" action="{{ route('logout') }}" class='block px-4 py-2 cursor-pointer  hover:bg-gray-600'>
+                            @csrf
+                            <button class="text-red-500"><i class="bi bi-box-arrow-left"></i> {{ __('Log Out') }}</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
-            <div class="card-body  bg-body-secondary mt-3 rounded">
-                <div class="center">
-                    @yield('content')
-                </div>
+            <div class="card-body  bg-body-secondary rounded">
+                @yield('content')
             </div>
         </div>
     </div>
 </div>
-
-
 
 <!-- Toggle Dark Mode Button -->
 <button class="toggle-mode" onclick="toggleDarkMode()">
@@ -120,7 +118,21 @@
             );
         });
     });
+</script>
 
+<script>
+    document.getElementById("userMenuButton").addEventListener("click", function (event) {
+        event.stopPropagation();
+        document.getElementById("userMenu").classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", function (event) {
+        let menu = document.getElementById("userMenu");
+        let button = document.getElementById("userMenuButton");
+        if (!button.contains(event.target) && !menu.contains(event.target)) {
+            menu.classList.add("hidden");
+        }
+    });
 </script>
 </body>
 </html>
