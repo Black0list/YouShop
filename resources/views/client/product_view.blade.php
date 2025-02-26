@@ -1,124 +1,147 @@
 @extends('welcome')
 @section('title', 'Product View')
 @section('view')
-<div class="max-w-8xl">
-    <!-- Product Header -->
-    <div class="bg-white p-8 rounded-lg shadow-sm mb-8">
-        <h1 class="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-400 bg-clip-text text-transparent">
-            {{ $product->title }}
-        </h1>
-        <div class="flex gap-8 flex-wrap mt-4">
-            <div class="flex items-center gap-2 text-gray-600">
-                <i class="fas fa-user-graduate text-indigo-600"></i>
-                <span>Instructor Name</span>
-            </div>
-            <div class="flex items-center gap-2 text-gray-600">
-                <i class="fas fa-bookmark text-indigo-600"></i>
-                <span>Category</span>
-            </div>
-        </div>
-        <div class="flex items-center gap-2 mt-4 text-gray-600">
-            <i class="fas fa-tags text-indigo-600"></i>
-            <span>Tag1, Tag2, Tag3</span>
-        </div>
-    </div>
 
-    <!-- Product Content Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Left Column -->
-        <div class="lg:col-span-2">
-            <!-- Product Description -->
-            <div class="bg-white p-8 rounded-lg shadow-sm">
-                <h2 class="text-2xl font-semibold mb-6">Product Description</h2>
-                <p class="text-gray-600 leading-relaxed">
-                    This is a detailed description of the product. It explains the features, benefits, and what users can expect.
-                </p>
-                <div class="w-full bg-gray-200 rounded-full h-2 mt-6">
-                    <div class="bg-indigo-600 h-2 rounded-full" style="width: 75%;"></div>
+    <div class="max-w-8xl">
+        <!-- Product Header -->
+        <div class="bg-white p-8 rounded-xl shadow-xl mb-8 flex flex-col md:flex-row justify-between items-center border border-gray-200">
+            <div>
+                <h1 class="text-4xl font-extrabold text-gray-800">
+                    {{ $product->title }}
+                </h1>
+                <div class="mt-4">
+                    <div class="flex items-center text-gray-600 space-x-2">
+                        <i class="bi bi-tags-fill text-indigo-500 text-lg"></i>
+                        <span class="font-semibold text-lg">{{ $product->subcategory->name }}</span>
+                    </div>
+                    <div class="flex items-center text-gray-600 space-x-2 mt-2">
+                        <i class="bi bi-card-text text-indigo-500 text-lg"></i>
+                        <span class="font-medium text-lg">{{ $product->subcategory->category->name }}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <img class="w-52 h-52 object-cover rounded-xl shadow-md border border-gray-300" src="{{ url('storage/'.$product->image) }}" alt="Product Image">
+            </div>
+        </div>
+
+        <!-- Product Details Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column -->
+            <div class="lg:col-span-2">
+                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200">
+                    <h2 class="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+                        <i class="bi bi-info-circle-fill text-indigo-500 mr-2"></i> Product Details
+                    </h2>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        {{ $product->description }}
+                    </p>
+                    <div class="mt-6 flex items-center text-lg">
+                        <i class="bi bi-box-seam text-green-600 text-xl mr-2"></i>
+                        <span class="text-gray-700 font-semibold">Stock: </span>
+                        <span class="text-green-600 font-bold ml-1">{{ $product->stock }}</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Curriculum Section -->
-            <div class="bg-white p-8 rounded-lg shadow-sm mt-8">
-                <h2 class="text-2xl font-semibold mb-6">Product Content</h2>
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <div class="bg-gray-50 p-4 flex justify-between items-center cursor-pointer">
-                        <h3 class="text-lg font-semibold">Module 1</h3>
-                        <i class="fas fa-chevron-down text-indigo-600"></i>
+            <!-- Right Column - Purchase Section -->
+            <div class="lg:col-span-1">
+                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200 sticky top-8">
+                    <div class="text-4xl font-bold text-indigo-600 mb-6 flex items-center">
+                        <i class="bi bi-cash-coin mr-2 text-3xl"></i> ${{ $product->price }}
                     </div>
-                    <div class="p-4 border-t border-gray-200">
-                        <div class="flex items-center gap-4 py-2 text-gray-600">
-                            <i class="fas fa-play-circle text-indigo-600"></i>
-                            <span>Video Lesson</span>
+
+                    <!-- Quantity Selector -->
+                    <div class="mb-6">
+                        <label for="quantity" class="block text-lg font-semibold text-gray-700">Quantity:</label>
+                        <div class="flex items-center mt-2 border border-gray-300 rounded-lg overflow-hidden w-36">
+                            <button id="decrease" class="bg-gray-200 px-4 py-2 text-lg font-bold hover:bg-gray-300">-</button>
+                            <input type="text" id="quantity" value="1" class="w-full text-center text-lg font-semibold text-gray-700 bg-white border-none focus:outline-none">
+                            <input type="hidden" id="product" value="{{ $product->id }}">
+                            <button id="increase" class="bg-gray-200 px-4 py-2 text-lg font-bold hover:bg-gray-300">+</button>
                         </div>
-                        <div class="flex items-center gap-4 py-2 text-gray-600">
-                            <i class="fas fa-file-alt text-indigo-600"></i>
-                            <span>Document</span>
+                    </div>
+                    <button id="BuyBtn" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center">
+                        <i class="bi bi-cart-fill mr-2"></i>
+                        add to cart
+                    </button>
+                    <div class="mt-6 space-y-3 text-gray-600">
+                        <div class="flex items-center gap-4">
+                            <i class="bi bi-truck text-green-600 text-xl"></i>
+                            <span>Fast Delivery Available</span>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Instructor Section -->
-            <div class="bg-white p-8 rounded-lg shadow-sm mt-8">
-                <h2 class="text-2xl font-semibold mb-6">Instructor</h2>
-                <div class="flex items-center gap-6">
-                    <img src="https://via.placeholder.com/80" alt="Instructor" class="w-20 h-20 rounded-full">
-                    <div>
-                        <h4 class="text-xl font-semibold">Instructor Name</h4>
-                        <p class="text-gray-600 mt-2">
-                            Expert in the field with years of experience. Passionate about teaching and sharing knowledge.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Column - Sidebar -->
-        <div class="lg:col-span-1">
-            <div class="bg-white p-8 rounded-lg shadow-sm sticky top-8">
-                <div class="text-4xl font-bold text-indigo-600 mb-6">$99.99</div>
-                <button class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-all">
-                    Buy Now
-                </button>
-                <div class="mt-6">
-                    <div class="flex items-center gap-4 py-3 text-gray-600">
-                        <i class="fas fa-video text-green-600"></i>
-                        <span>24 hours on-demand video</span>
-                    </div>
-                    <div class="flex items-center gap-4 py-3 text-gray-600">
-                        <i class="fas fa-infinity text-green-600"></i>
-                        <span>Full lifetime access</span>
-                    </div>
-                    <div class="flex items-center gap-4 py-3 text-gray-600">
-                        <i class="fas fa-mobile-alt text-green-600"></i>
-                        <span>Access on mobile and TV</span>
-                    </div>
-                    <div class="flex items-center gap-4 py-3 text-gray-600">
-                        <i class="fas fa-certificate text-green-600"></i>
-                        <span>Certificate of completion</span>
+                        <div class="flex items-center gap-4">
+                            <i class="bi bi-credit-card text-green-600 text-xl"></i>
+                            <span>Secure Payments</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i class="bi bi-award text-green-600 text-xl"></i>
+                            <span>30 Days Warranty</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i class="bi bi-shield-lock text-green-600 text-xl"></i>
+                            <span>100% Buyer Protection</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    // Accordion functionality
-    document.querySelectorAll('.bg-gray-50').forEach(header => {
-        header.addEventListener('click', () => {
-            const module = header.parentElement;
-            module.classList.toggle('active');
+    <script>
+        // Buy Now Button Animation
+        document.getElementById('BuyBtn').addEventListener('click', function(e) {
+            const buyText = document.getElementById('buyText');
+            const spinner = document.getElementById('spinner');
 
-            const icon = header.querySelector('i');
-            if (module.classList.contains('active')) {
-                icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
-            } else {
-                icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+            buyText.textContent = "Processing...";
+            spinner.classList.remove('hidden');
+
+            setTimeout(() => {
+                buyText.textContent = "Purchase Successful!";
+                spinner.classList.add('hidden');
+                document.getElementById('BuyBtn').classList.add('bg-green-600', 'hover:bg-green-700');
+            }, 2000);
+        });
+
+        // Quantity Selector Logic
+        const quantityInput = document.getElementById('quantity');
+        document.getElementById('increase').addEventListener('click', function() {
+            let value = parseInt(quantityInput.value);
+            if (value < {{ $product->stock }}) {
+                quantityInput.value = value + 1;
             }
         });
-    });
-</script>
+
+        document.getElementById('decrease').addEventListener('click', function() {
+            let value = parseInt(quantityInput.value);
+            if (value > 1) {
+                quantityInput.value = value - 1;
+            }
+        });
+        //////////////////////////////////////////////////////// Dynamic
+
+        document.getElementById("BuyBtn").addEventListener("click", function () {
+            let formData = {
+                quantity: document.getElementById("quantity").value,
+                product: document.getElementById("product").value
+            };
+
+            fetch("/product/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.product + 'oo' + data.quantity);
+                })
+                .catch(error => console.error("Fetch Error:", error));
+        });
+
+    </script>
 
 @endsection

@@ -70,8 +70,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/product/create', [ProductController::class, 'create']);
     Route::put('/product/update', [ProductController::class, 'update']);
     Route::post('/product/get', [ProductController::class, 'getOne']);
+
 });
 
 Route::get('/products', [ProductController::class, 'home']);
 Route::post('/products/view', [ProductController::class, 'view']);
+Route::post('/product/add', [ProductController::class, 'add']);
+
+Route::get('/test', [ProductController::class, 'test']);
 

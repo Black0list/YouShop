@@ -113,4 +113,16 @@ class ProductController extends Controller
 
         return view('client.product_view', compact('product'));
     }
+
+    public function add(Request $request)
+    {
+        session(['product' => $request['product'], 'quantity' => $request['quantity']]);
+        return response()->json(['product' => $request['product'], 'quantity' => $request['quantity']]);
+    }
+
+    public  function test(Request $request)
+    {
+        dd(session('product'), session('quantity'));
+    }
 }
+

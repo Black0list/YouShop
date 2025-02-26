@@ -80,7 +80,7 @@
                         <td>${{ $product->price }}</td>
                         <td><span class="badge bg-primary">{{ $product->stock }}</span></td>
                         <td><span class="badge bg-success">{{ $product->user->name }}</span></td>
-                        <td><span class="badge bg-primary">{{ $product->category->name }}</span></td>
+                        <td><span class="badge bg-primary">{{ $product->subcategory->name }}</span></td>
                         <td>
                             <form action="{{ url('/admin/product/get') }}" method="POST" style="display:inline;">
                                 @csrf
