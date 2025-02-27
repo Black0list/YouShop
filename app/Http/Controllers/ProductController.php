@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -114,28 +115,36 @@ class ProductController extends Controller
         return view('client.product_view', compact('product'));
     }
 
-    public function add(Request $request)
-    {
-//        $product = [$request['product'] => $request['quantity']];
-//        if(isset($_SESSION['products'])){
-//            array_push($_SESSION['products'], $product);
-//        } else {
-//            $_SESSION['products'] = [$product];
-//        }
-//
-//        dd($_SESSION['products']);
-    }
-
     public function getItems(Request $request)
     {
-        $product = Product::find(session('product'));
-        return response()->json(['product' => session()->get('product'), 'quantity' => session()->get('quantity')]);
+        $products = $request->json()->all();
+
+        if (!$products || !is_array($products)) {
+            return response()->json(['error' => 'Invalid data received'], 400);
+        }
+
+        Log::info('Received request data:', $products);
+
+        $array = [];
+        $i = 0;
+        foreach ($products as $product) {
+            $prod = Product::find($product['product']);
+
+            if ($prod) {
+                $array[$i] = [
+                    'id' => $prod->id,
+                    'title' => $prod->title,
+                    'price' => $prod->price,
+                    'image' => $prod->image,
+                    'description' => $prod->description,
+                    'quantity' => $product['quantity'] ?? 1
+                ];
+                $i++;
+            }
+        }
+
+        return response()->json(['products' => $array], 200);
     }
 
-    public  function test(Request $request)
-    {
-//        $request->session()->flush();
-        dd(isset($_SESSION['products']));
-    }
 }
 

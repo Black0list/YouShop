@@ -128,6 +128,7 @@
             // localStorage.clear()
             let quantity = parseInt(document.getElementById("quantity").value);
             let product = document.getElementById("product").value;
+            let price = {{ $product->price }};
 
             let products = localStorage.getItem('products') ? JSON.parse(localStorage.getItem('products')) : [];
 
@@ -136,7 +137,7 @@
             if (existingProduct) {
                 existingProduct.quantity = quantity;
             } else {
-                products.push({ product: product, quantity: quantity });
+                products.push({ product: product, quantity: quantity, price: price });
             }
 
             localStorage.setItem('products', JSON.stringify(products));

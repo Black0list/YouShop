@@ -77,7 +77,10 @@
                         <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                             <div class="flex justify-between text-base font-medium text-gray-900">
                                 <p>Subtotal</p>
-                                <p>$262.00</p>
+                                <div class="flex">
+                                    <span>$</span>
+                                    <span id="totalAmount">0</span>
+                                </div>
                             </div>
                             <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                             <div class="mt-6">
@@ -114,8 +117,89 @@
 <script>
     document.getElementById("cartButton").addEventListener("click", function (event) {
         event.preventDefault();
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         let cart = document.getElementById("cart");
         cart.classList.toggle("hidden");
+
+        itemsSection = document.getElementById('items');
+        items = JSON.parse(localStorage.getItem('products'));
+        fetch('/products/get', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify(items)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                itemsSection.innerHTML = '';
+                let Total = 0;
+                console.log(items)
+                for (let i = 0; i < items.length; i++)
+                {
+                    itemsSection.innerHTML += `<li class="flex py-6">
+                      <div class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
+                        <img src="/storage/${data['products'][i].image}" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="size-full object-cover">
+                      </div>
+
+                      <div class="ml-4 flex flex-1 flex-col">
+                        <div>
+                          <div class="flex justify-between text-base font-medium text-gray-900">
+                            <h3>
+                              <a href="#">${data['products'][i].title}</a>
+                            </h3>
+                            <p class="ml-4">$${data['products'][i].price} x${data['products'][i].quantity}</p>
+                          </div>
+                        </div>
+                        <div class="flex flex-1 items-end justify-between text-sm">
+                          <p class="text-gray-500">${data['products'][i].quantity}</p>
+
+                          <div class="flex">
+                            <button type="button" data-id="${data['products'][i].id}" class="font-medium text-indigo-600 hover:text-indigo-500 removeTag">Remove</button>
+                          </div>
+                        </div>
+                      </div>
+                    </li>`
+
+                    Total += data['products'][i].price * data['products'][i].quantity || 0;
+                }
+
+                totalSpan = document.getElementById('totalAmount');
+                totalSpan.textContent = Total;
+
+                document.querySelectorAll(".removeTag").forEach(function(element) {
+                    element.addEventListener("click", function (event) {
+                        for(let i = 0; i < items.length;i++)
+                        {
+                            if(items[i].product === element.getAttribute('data-id'))
+                            {
+                                event.stopPropagation();
+                                event.currentTarget.closest('li').remove();
+                                items.splice(i, 1);
+                            }
+                        }
+                        localStorage.setItem('products', JSON.stringify(items));
+                        Total = 0;
+                        items.forEach((element, index) => {
+                            Total += element.price * element.quantity;
+                        })
+                        totalSpan.textContent = Total;
+                    });
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+
+
+
     });
 
     document.getElementById("closeCart").addEventListener("click", function () {
@@ -143,40 +227,6 @@
         }
     });
 
-    document.addEventListener("DOMContentLoaded", (event) => {
-        itemsSection = document.getElementById('items');
-        items = JSON.parse(localStorage.getItem('products'));
-
-        fetch('/products/get')
-
-        for (let i = 0; i < items.length; i++)
-        {
-            itemsSection.innerHTML += `<li class="flex py-6">
-                      <div class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                        <img src="https://tailwindui.com/plus-assets/img/ecommerce-images/shopping-cart-page-04-product-01.jpg" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="size-full object-cover">
-                      </div>
-
-                      <div class="ml-4 flex flex-1 flex-col">
-                        <div>
-                          <div class="flex justify-between text-base font-medium text-gray-900">
-                            <h3>
-                              <a href="#">Throwback Hip Bag</a>
-                            </h3>
-                            <p class="ml-4">$90.00</p>
-                          </div>
-                          <p class="mt-1 text-sm text-gray-500">Salmon</p>
-                        </div>
-                        <div class="flex flex-1 items-end justify-between text-sm">
-                          <p class="text-gray-500">Qty 1</p>
-
-                          <div class="flex">
-                            <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>`
-        }
-    })
 
 
 </script>

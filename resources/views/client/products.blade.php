@@ -13,11 +13,11 @@
                     <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 p-8" >View</button>
                     <input type="hidden" name="product" value="{{ $product->id }}">
                 </form>
-                <form action="" method="POST" class="mt-4">
-                    @csrf
-                    <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 p-8">Add to Cart</button>
-                    <input type="hidden" name="product" value="{{ $product->id }}">
-                </form>
+{{--                <form action="" method="POST" class="mt-4">--}}
+{{--                    @csrf--}}
+{{--                    <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 p-8">Add to Cart</button>--}}
+{{--                    <input type="hidden" name="product" value="{{ $product->id }}">--}}
+{{--                </form>--}}
             </div>
         </div>
     @endforeach
