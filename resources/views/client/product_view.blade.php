@@ -47,16 +47,15 @@
             <!-- Right Column - Purchase Section -->
             <div class="lg:col-span-1">
                 <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200 sticky top-8">
-                    <div class="text-4xl font-bold text-indigo-600 mb-6 flex items-center">
-                        <i class="bi bi-cash-coin mr-2 text-3xl"></i> ${{ $product->price }}
+                    <div class="text-4xl font-bold text-indigo-600 mb-6 flex items-center" >
+                        <i class="bi bi-cash-coin mr-2 text-3xl"></i>$<span id="price">{{ $product->price }}</span>
                     </div>
-
                     <!-- Quantity Selector -->
                     <div class="mb-6">
                         <label for="quantity" class="block text-lg font-semibold text-gray-700">Quantity:</label>
                         <div class="flex items-center mt-2 border border-gray-300 rounded-lg overflow-hidden w-36">
                             <button id="decrease" class="bg-gray-200 px-4 py-2 text-lg font-bold hover:bg-gray-300">-</button>
-                            <input type="text" id="quantity" value="1" class="w-full text-center text-lg font-semibold text-gray-700 bg-white border-none focus:outline-none">
+                            <input type="text" id="quantity" value="1" class="w-full text-center text-lg font-semibold text-gray-700 bg-white border-none focus:outline-none" disabled>
                             <input type="hidden" id="product" value="{{ $product->id }}">
                             <button id="increase" class="bg-gray-200 px-4 py-2 text-lg font-bold hover:bg-gray-300">+</button>
                         </div>
@@ -89,58 +88,63 @@
     </div>
 
     <script>
-        // Buy Now Button Animation
-        document.getElementById('BuyBtn').addEventListener('click', function(e) {
-            const buyText = document.getElementById('buyText');
-            const spinner = document.getElementById('spinner');
+        // document.getElementById('BuyBtn').addEventListener('click', function(e) {
+        //     const buyText = document.getElementById('buyText');
+        //     const spinner = document.getElementById('spinner');
+        //
+        //     buyText.textContent = "Processing...";
+        //     spinner.classList.remove('hidden');
+        //
+        //     setTimeout(() => {
+        //         buyText.textContent = "Purchase Successful!";
+        //         spinner.classList.add('hidden');
+        //         document.getElementById('BuyBtn').classList.add('bg-green-600', 'hover:bg-green-700');
+        //     }, 2000);
+        // });
 
-            buyText.textContent = "Processing...";
-            spinner.classList.remove('hidden');
-
-            setTimeout(() => {
-                buyText.textContent = "Purchase Successful!";
-                spinner.classList.add('hidden');
-                document.getElementById('BuyBtn').classList.add('bg-green-600', 'hover:bg-green-700');
-            }, 2000);
-        });
-
-        // Quantity Selector Logic
         const quantityInput = document.getElementById('quantity');
         document.getElementById('increase').addEventListener('click', function() {
             let value = parseInt(quantityInput.value);
             if (value < {{ $product->stock }}) {
-                quantityInput.value = value + 1;
+                quantityInput.value = ++value;
+                document.getElementById('price').textContent = {{ $product->price }} * value;
             }
         });
 
         document.getElementById('decrease').addEventListener('click', function() {
             let value = parseInt(quantityInput.value);
             if (value > 1) {
-                quantityInput.value = value - 1;
+                lastQty = document.getElementById('quantity').value;
+                lastPrice = document.getElementById('price').textContent;
+                quantityInput.value = --value;
+                newQty = document.getElementById('quantity').value;
+                console.log(lastQty, lastPrice, newQty);
+                document.getElementById('price').textContent = (newQty * lastPrice) / lastQty;
             }
         });
         //////////////////////////////////////////////////////// Dynamic
 
         document.getElementById("BuyBtn").addEventListener("click", function () {
-            let formData = {
-                quantity: document.getElementById("quantity").value,
-                product: document.getElementById("product").value
-            };
+            // localStorage.clear()
+            let quantity = parseInt(document.getElementById("quantity").value);
+            let product = document.getElementById("product").value;
 
-            fetch("/product/add", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
-                },
-                body: JSON.stringify(formData)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.product + 'oo' + data.quantity);
-                })
-                .catch(error => console.error("Fetch Error:", error));
+            let products = localStorage.getItem('products') ? JSON.parse(localStorage.getItem('products')) : [];
+
+            let existingProduct = products.find(item => item.product === product);
+
+            if (existingProduct) {
+                existingProduct.quantity = quantity;
+            } else {
+                products.push({ product: product, quantity: quantity });
+            }
+
+            localStorage.setItem('products', JSON.stringify(products));
+
+            console.log(products);
         });
+
+
 
     </script>
 

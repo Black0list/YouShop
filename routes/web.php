@@ -76,6 +76,7 @@ Route::prefix('admin')->group(function () {
 Route::get('/products', [ProductController::class, 'home']);
 Route::post('/products/view', [ProductController::class, 'view']);
 Route::post('/product/add', [ProductController::class, 'add']);
+Route::post('/product/getItems', [ProductController::class, 'getItems']);
 
 Route::get('/test', [ProductController::class, 'test']);
 

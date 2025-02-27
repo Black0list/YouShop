@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Session\Middleware\StartSession;
 use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -22,7 +23,6 @@ class ProductController extends Controller
     {
         $products = Product::all();
         $categories = SubCategory::all();
-
         return view('client.products', compact('products', 'categories'));
     }
 
@@ -116,13 +116,26 @@ class ProductController extends Controller
 
     public function add(Request $request)
     {
-        session(['product' => $request['product'], 'quantity' => $request['quantity']]);
-        return response()->json(['product' => $request['product'], 'quantity' => $request['quantity']]);
+//        $product = [$request['product'] => $request['quantity']];
+//        if(isset($_SESSION['products'])){
+//            array_push($_SESSION['products'], $product);
+//        } else {
+//            $_SESSION['products'] = [$product];
+//        }
+//
+//        dd($_SESSION['products']);
+    }
+
+    public function getItems(Request $request)
+    {
+        $product = Product::find(session('product'));
+        return response()->json(['product' => session()->get('product'), 'quantity' => session()->get('quantity')]);
     }
 
     public  function test(Request $request)
     {
-        dd(session('product'), session('quantity'));
+//        $request->session()->flush();
+        dd(isset($_SESSION['products']));
     }
 }
 
