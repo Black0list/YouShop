@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use Illuminate\Session\Middleware\StartSession;
 use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -15,7 +13,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::query()->paginate(3);
         $categories = SubCategory::all();
         return view('admin.products', compact('products', 'categories'));
     }
@@ -118,7 +116,7 @@ class ProductController extends Controller
     public function getItems(Request $request)
     {
         $products = $request->json()->all();
-
+        Log::info($request);
         if (!$products || !is_array($products)) {
             return response()->json(['error' => 'Invalid data received'], 400);
         }
@@ -144,6 +142,11 @@ class ProductController extends Controller
         }
 
         return response()->json(['products' => $array], 200);
+    }
+
+    public function pay()
+    {
+        return view('client.payment');
     }
 
 }

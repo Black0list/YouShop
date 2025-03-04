@@ -84,7 +84,11 @@
                             </div>
                             <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                             <div class="mt-6">
-                                <a href="#" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700">Checkout</a>
+                                <form action="/pay" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="totalAmount" id="total">
+                                    <button type="submit" class="block rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700">Checkout</button>
+                                </form>
                             </div>
                             <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                                 <p>
@@ -130,7 +134,7 @@
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': csrfToken
             },
-            body: JSON.stringify(items)
+            body: localStorage.getItem('products')
         })
             .then(response => {
                 if (!response.ok) {
@@ -173,6 +177,7 @@
 
                 totalSpan = document.getElementById('totalAmount');
                 totalSpan.textContent = Total;
+                document.getElementById('total').value = Total;
 
                 document.querySelectorAll(".removeTag").forEach(function(element) {
                     element.addEventListener("click", function (event) {
@@ -191,6 +196,7 @@
                             Total += element.price * element.quantity;
                         })
                         totalSpan.textContent = Total;
+                        document.getElementById('total').value = Total;
                     });
                 });
             })
