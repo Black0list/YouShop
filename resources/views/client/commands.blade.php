@@ -126,9 +126,9 @@
                     </fieldset>
                 </section>
                 <br>
-                <input type="hidden" name="finalAmount" value="{{ $TotalPrice }}">
+                <input type="hidden" name="finalAmount" value="{{ $total_price }}">
                 <button type="submit" class="px-4 py-3 rounded-full bg-pink-400 text-white focus:outline-none w-full text-xl font-semibold transition-colors">
-                    Pay ${{ number_format($TotalPrice, 2, ',', ' ') }}
+                    Pay ${{ number_format($total_price, 2, ',', ' ') }}
                 </button>
             </form>
         </div>
@@ -138,19 +138,19 @@
     <div class="col-span-1 bg-white lg:block hidden">
         <h1 class="py-6 border-b-2 text-xl text-gray-600 px-8">Order Summary</h1>
         <ul class="py-6 border-b space-y-6 px-8">
-            @foreach($OrderedProducts as $Product)
+            @foreach($Products as $Product)
                 <li class="grid grid-cols-6 gap-2 border-b-1">
                     <div class="col-span-1 self-center">
-                        <img src="{{ url('/storage/' . $Product[0]->image) }}" alt="Product" class="rounded w-full">
+                        <img src="{{ url('/storage/' . $Product->product->image) }}" alt="Product" class="rounded w-full">
                     </div>
                     <div class="flex flex-col col-span-3 pt-2">
-                        <span class="text-gray-600 text-md font-semi-bold">{{ $Product[0]->title }}</span>
-                        <span class="text-gray-400 text-sm inline-block pt-2">{{ $Product[0]->subcategory->name }}</span>
+                        <span class="text-gray-600 text-md font-semi-bold">{{ $Product->product->title }}</span>
+                        <span class="text-gray-400 text-sm inline-block pt-2">{{ $Product->product->subcategory->name }}</span>
                     </div>
                     <div class="col-span-2 pt-3">
                         <div class="flex items-center space-x-2 text-sm justify-between">
-                            <span class="text-gray-400">${{ $Product[1] }} x ${{ $Product[0]->price }}</span>
-                            <span class="text-pink-400 font-semibold inline-block">${{  number_format($Product[1] * $Product[0]->price, 2, ',', ' ') }}</span>
+                            <span class="text-gray-400">${{ $Product->quantity }} x ${{ $Product->product->price }}</span>
+                            <span class="text-pink-400 font-semibold inline-block">${{  number_format($Product->quantity * $Product->product->price, 2, ',', ' ') }}</span>
                         </div>
                     </div>
                 </li>
@@ -159,7 +159,7 @@
         <div class="px-8 border-b">
             <div class="flex justify-between py-4 text-gray-600">
                 <span>Subtotal</span>
-                <span class="font-semibold text-pink-500">${{ number_format($TotalPrice, 2, ',', ' ') }}</span>
+                <span class="font-semibold text-pink-500">${{ number_format($total_price, 2, ',', ' ') }}</span>
             </div>
             <div class="flex justify-between py-4 text-gray-600">
                 <span>Shipping</span>
@@ -168,7 +168,7 @@
         </div>
         <div class="font-semibold text-xl px-8 flex justify-between py-8 text-gray-600">
             <span>Total</span>
-            <span>${{ number_format($TotalPrice, 2, ',', ' ') }}</span>
+            <span>${{ number_format($total_price, 2, ',', ' ') }}</span>
         </div>
     </div>
 </div>

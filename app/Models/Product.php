@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Stripe\Climate\Order;
 
 class Product extends Model
 {
@@ -29,6 +30,11 @@ class Product extends Model
     public function subcategory()
     {
         return $this->belongsTo(SubCategory::class, 'category_id');
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(CommandProduct::class);
     }
 
 

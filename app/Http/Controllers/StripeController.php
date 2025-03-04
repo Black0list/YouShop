@@ -38,7 +38,6 @@ class StripeController extends Controller
             "description" => ""
         ]);
 
-        echo "<script>localStorage.clear();</script>";
         return  view('client.success');
 
     }

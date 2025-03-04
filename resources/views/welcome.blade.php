@@ -87,6 +87,7 @@
                                 <form action="/commands/view" method="POST">
                                     @csrf
                                     <input type="hidden" name="data"  id="data">
+                                    <input type="hidden" name="balance" id="total">
                                     <button type="submit" class="block rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700">Checkout</button>
                                 </form>
                             </div>

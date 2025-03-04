@@ -68,11 +68,11 @@
             <div class="space-y-2">
                 <dl class="flex items-center justify-between">
                     <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Original price</dt>
-                    <dd class="text-base font-medium text-green-500">${{ $totalAmount }}</dd>
+                    <dd class="text-base font-medium text-green-500">${{ number_format($totalAmount, 2, ',', ' ') }}</dd>
                 </dl>
                 <dl class="flex items-center justify-between">
                     <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Shipping</dt>
-                    <dd class="text-base font-medium text-blue-500">+${{ $shipping }}</dd>
+                    <dd class="text-base font-medium text-blue-500">{{ $shipping }}</dd>
                 </dl>
 {{--                <dl class="flex items-center justify-between">--}}
 {{--                    <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Store Pickup</dt>--}}
@@ -80,7 +80,7 @@
 {{--                </dl>--}}
                 <dl class="flex items-center justify-between">
                     <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Tax</dt>
-                    <dd class="text-base font-medium text-gray-900 dark:text-white">${{ $Tax }}</dd>
+                    <dd class="text-base font-medium text-gray-900 dark:text-white">${{ number_format($Tax, 2, ',', ' ') }}</dd>
                 </dl>
             </div>
 
