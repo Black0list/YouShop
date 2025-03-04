@@ -13,14 +13,14 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::query()->paginate(3);
+        $products = Product::all();
         $categories = SubCategory::all();
         return view('admin.products', compact('products', 'categories'));
     }
 
     public function home()
     {
-        $products = Product::all();
+        $products = Product::paginate(6);
         $categories = SubCategory::all();
         return view('client.products', compact('products', 'categories'));
     }
@@ -142,11 +142,6 @@ class ProductController extends Controller
         }
 
         return response()->json(['products' => $array], 200);
-    }
-
-    public function pay()
-    {
-        return view('client.payment');
     }
 
 }

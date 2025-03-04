@@ -84,9 +84,9 @@
                             </div>
                             <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                             <div class="mt-6">
-                                <form action="/pay" method="POST">
+                                <form action="/commands/view" method="POST">
                                     @csrf
-                                    <input type="hidden" name="totalAmount" id="total">
+                                    <input type="hidden" name="data"  id="data">
                                     <button type="submit" class="block rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700">Checkout</button>
                                 </form>
                             </div>
@@ -94,8 +94,7 @@
                                 <p>
                                     or
                                     <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Continue Shopping
-                                        <span aria-hidden="true"> &rarr;</span>
+                                        <a href="/products" aria-hidden="true">Continue Shopping &rarr;</a>
                                     </button>
                                 </p>
                             </div>
@@ -119,6 +118,10 @@
 
 <!-- Script JS -->
 <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById('data').value = localStorage.getItem('products');
+    });
+
     document.getElementById("cartButton").addEventListener("click", function (event) {
         event.preventDefault();
 
@@ -232,8 +235,6 @@
             cart.classList.add("hidden");
         }
     });
-
-
 
 </script>
 

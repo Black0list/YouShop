@@ -15,10 +15,11 @@ class StripeController extends Controller
      */
     public function pay(Request $request)
     {
-        $totalAmount  = $request['totalAmount'];
+        $totalAmount  = $request['finalAmount'];
         $Tax = 99;
+        $shipping = 'Free';
         $finalAmount = $totalAmount + $Tax;
-        return view('client.stripe', compact('totalAmount', 'Tax', 'finalAmount'));
+        return view('client.stripe', compact('totalAmount', 'Tax', 'finalAmount', 'shipping'));
     }
 
     /**
@@ -37,12 +38,8 @@ class StripeController extends Controller
             "description" => ""
         ]);
 
-        try {
-            echo "<script>localStorage.clear();</script>";
-            return  view('client.success');
-        } catch (\Exception $exception) {
-            die($exception->getMessage());
-        }
+        echo "<script>localStorage.clear();</script>";
+        return  view('client.success');
 
     }
 }

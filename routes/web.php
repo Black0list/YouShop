@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -29,6 +30,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::controller(StripeController::class)->group(function(){
+        Route::post('/pay', 'pay');
+        Route::post('/command/pay', 'stripePost')->name('stripe.post');
+    });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -77,9 +82,8 @@ Route::prefix('admin')->group(function () {
 Route::get('/products', [ProductController::class, 'home']);
 Route::post('/products/view', [ProductController::class, 'view']);
 Route::post('/products/get', [ProductController::class, 'getItems']);
-Route::post('/command/pay', [ProductController::class, 'pay']);
 
-Route::controller(StripeController::class)->group(function(){
-    Route::post('/pay', 'pay');
-    Route::post('/command/pay', 'stripePost')->name('stripe.post');
-});
+
+Route::post('/commands/view', [CommandController::class, 'commandsPage']);
+
+

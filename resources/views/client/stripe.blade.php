@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stripe Payment - Modern UI</title>
+    <title>Stripe Payment</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://js.stripe.com/v2/"></script>
@@ -27,28 +27,6 @@
             <div>
                 <label class="block text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
                 <input type="text" name="billing_name" class="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="John Doe">
-            </div>
-            <div>
-                <label class="block text-gray-700 dark:text-gray-300 mb-1">Street Address</label>
-                <input type="text" name="billing_address" class="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="123 Main St">
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                    <label class="block text-gray-700 dark:text-gray-300 mb-1">City</label>
-                    <input type="text" name="billing_city" class="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="City">
-                </div>
-                <div>
-                    <label class="block text-gray-700 dark:text-gray-300 mb-1">State</label>
-                    <input type="text" name="billing_state" class="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="State">
-                </div>
-                <div>
-                    <label class="block text-gray-700 dark:text-gray-300 mb-1">ZIP Code</label>
-                    <input type="text" name="billing_zip" class="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="ZIP">
-                </div>
-            </div>
-            <div>
-                <label class="block text-gray-700 dark:text-gray-300 mb-1">Country</label>
-                <input type="text" name="billing_country" class="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Country">
             </div>
 
             <div>
@@ -75,7 +53,7 @@
                 <p>Please correct the errors and try again.</p>
             </div>
 
-            <input name="balance" value="{{ $totalAmount }}">
+            <input type="hidden" name="balance" value="{{ $totalAmount }}">
 
             <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-lg font-semibold">
                 Pay Now
@@ -92,10 +70,10 @@
                     <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Original price</dt>
                     <dd class="text-base font-medium text-green-500">${{ $totalAmount }}</dd>
                 </dl>
-{{--                <dl class="flex items-center justify-between">--}}
-{{--                    <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Savings</dt>--}}
-{{--                    <dd class="text-base font-medium text-green-500">-$299.00</dd>--}}
-{{--                </dl>--}}
+                <dl class="flex items-center justify-between">
+                    <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Shipping</dt>
+                    <dd class="text-base font-medium text-blue-500">+${{ $shipping }}</dd>
+                </dl>
 {{--                <dl class="flex items-center justify-between">--}}
 {{--                    <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Store Pickup</dt>--}}
 {{--                    <dd class="text-base font-medium text-gray-900 dark:text-white">$99</dd>--}}
@@ -108,7 +86,7 @@
 
             <dl class="flex items-center justify-between border-t border-gray-200 pt-2 dark:border-gray-700">
                 <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                <dd class="text-base font-bold text-gray-900 dark:text-white">${{ number_format($finalAmount, 2, ',', ' '); }}</dd>
+                <dd class="text-base font-bold text-gray-900 dark:text-white">${{ number_format($finalAmount, 2, ',', ' ') }}</dd>
             </dl>
         </div>
 
