@@ -13,7 +13,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(7);
         $categories = SubCategory::all();
         return view('admin.products', compact('products', 'categories'));
     }
@@ -27,8 +27,6 @@ class ProductController extends Controller
 
     public function create(Request $request)
     {
-//        dd($request);
-
         $request->validate([
             'image' => 'required|file|mimes:jpg,png|max:2048',
         ]);

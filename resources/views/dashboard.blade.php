@@ -53,12 +53,9 @@
                 <a href="/admin/products" class="nav-link mb-2" onclick="setActive(this)">
                     <i class="bi bi-bag-plus-fill"></i>Products
                 </a>
-                <a href="/admin/reservations" class="nav-link mb-2" onclick="setActive(this)">
+                <a href="/admin/commands" class="nav-link mb-2" onclick="setActive(this)">
                     <i class="bi bi-archive-fill"></i>Commands
                     <span class="badge bg-danger ms-2">3</span>
-                </a>
-                <a href="/profile" class="nav-link mb-2" onclick="setActive(this)">
-                    <i class="bi bi-person-circle me-2"></i>Profile
                 </a>
             </nav>
         </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommandController;
+use App\Http\Controllers\CommandProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -77,6 +78,9 @@ Route::prefix('admin')->group(function () {
     Route::put('/product/update', [ProductController::class, 'update']);
     Route::post('/product/get', [ProductController::class, 'getOne']);
 
+    //================================= COMMANDS ===================================
+    Route::get('/commands', [CommandController::class, 'index']);
+    Route::put('/command/update', [CommandController::class, 'update']);
 });
 
 Route::get('/products', [ProductController::class, 'home']);
@@ -85,5 +89,7 @@ Route::post('/products/get', [ProductController::class, 'getItems']);
 
 
 Route::post('/commands/view', [CommandController::class, 'commandsPage']);
+Route::get('/commands', [CommandController::class, 'history']);
 
-
+Route::delete('/command/cancel', [CommandController::class, 'delete']);
+Route::get('/command/view/{command}', [CommandProductController::class, 'command_view']);

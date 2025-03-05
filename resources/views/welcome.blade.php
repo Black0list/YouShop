@@ -13,34 +13,89 @@
 <!-- Navbar -->
 <nav class="bg-gray-900 text-white shadow-md py-4">
     <div class="container mx-auto flex justify-between items-center px-6">
-        <a href="/" class="text-xl font-bold text-blue-400">YouShop</a>
-        <div class="flex space-x-6">
-            <a href="/products" class="hover:text-blue-400 transition">Catalogue</a>
-            <a href="#" id="cartButton" class="hover:text-blue-400 transition">Cart</a>
+        <!-- Logo -->
+        <a href="/" class="text-2xl font-bold flex items-center gap-2 text-blue-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m5-9v9m4-9v9m4-9l2 9" />
+            </svg>
+            YouShop
+        </a>
+
+        <!-- Links -->
+        <div class="flex space-x-8">
+            <a href="/products" class="flex items-center gap-2 hover:text-blue-400 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                Catalogue
+            </a>
+            <a href="#" id="cartButton" class="flex items-center gap-2 hover:text-blue-400 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m5-9v9m4-9v9m4-9l2 9" />
+                </svg>
+                Cart
+            </a>
         </div>
+
+        <!-- User Area -->
         <div class="flex items-center space-x-4">
             @auth
                 <div class="relative">
-                    <button id="userMenuButton" class="text-white font-semibold focus:outline-none">
+                    <button id="userMenuButton" class="flex items-center gap-2 font-semibold focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A7 7 0 1112 19a7.002 7.002 0 01-6.879-5.196z" />
+                        </svg>
                         Hello, {{ Auth::user()->name ?? 'Guest' }}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </button>
-                    <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-gray-700 rounded-lg shadow-lg py-2">
-                        <a href="/profile" class="block px-4 py-2 text-white hover:bg-gray-600">Profile</a>
+                    <!-- Dropdown -->
+                    <div id="userMenu" class="hidden absolute right-0 mt-3 w-48 bg-gray-800 rounded-lg shadow-lg py-2 z-50">
+                        <a href="/profile" class="flex items-center gap-2 px-4 py-2 text-white hover:bg-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A7 7 0 1112 19a7.002 7.002 0 01-6.879-5.196z" />
+                            </svg>
+                            Profile
+                        </a>
+                        <a href="/commands" class="flex items-center gap-2 px-4 py-2 text-white hover:bg-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10m-11 4h12m-7 4h2" />
+                            </svg>
+                            History
+                        </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="block w-full text-left px-4 py-2 text-white hover:bg-gray-600">
+                            <button type="submit"
+                                    class="flex items-center gap-2 w-full text-left px-4 py-2 text-white hover:bg-gray-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7" />
+                                </svg>
                                 Log Out
                             </button>
                         </form>
                     </div>
                 </div>
             @else
-                <a href="{{ route('login') }}" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">Connexion</a>
-                <a href="{{ route('register') }}" class="px-4 py-2 border border-blue-400 text-blue-400 rounded-lg hover:bg-blue-500 hover:text-white transition">Inscription</a>
+                <a href="{{ route('login') }}"
+                   class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                    Connexion
+                </a>
+                <a href="{{ route('register') }}"
+                   class="px-4 py-2 border border-blue-400 text-blue-400 rounded-lg hover:bg-blue-500 hover:text-white transition flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Inscription
+                </a>
             @endauth
         </div>
     </div>
 </nav>
+
 
 <!-- Cart Sidebar -->
 <div id="cart" class="fixed inset-0 overflow-hidden z-10 hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
@@ -114,21 +169,18 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @yield('content')
     </div>
-    <div>@yield('view')</div>
+    <div class="rounded">@yield('view')</div>
 </div>
 
 <!-- Script JS -->
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById('data').value = localStorage.getItem('products');
-    });
-
     document.getElementById("cartButton").addEventListener("click", function (event) {
         event.preventDefault();
 
+        document.getElementById('data').value = localStorage.getItem('products');
+
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         let cart = document.getElementById("cart");
-        cart.classList.toggle("hidden");
 
         itemsSection = document.getElementById('items');
         items = JSON.parse(localStorage.getItem('products'));
@@ -208,8 +260,7 @@
                 console.error('Error fetching data:', error);
             });
 
-
-
+        cart.classList.toggle("hidden");
     });
 
     document.getElementById("closeCart").addEventListener("click", function () {

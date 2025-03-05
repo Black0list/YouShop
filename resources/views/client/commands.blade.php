@@ -40,9 +40,14 @@
             </div>
             <div class="text-sm tracking-wide text-gray-500 mt-4 sm:mt-0 sm:ml-4">Complete your shipping details below.</div>
             <div class="absolute sm:relative sm:top-auto sm:right-auto ml-auto right-4 top-4 text-gray-400 hover:text-gray-800 cursor-pointer">
-                <a href="/products" class="submit-button px-4 py-1 rounded-full bg-pink-400 text-white focus:ring focus:outline-none w-full text-xl font-semibold transition-colors">
-                    Back to Home
-                </a>
+                <form action="/command/cancel" method="POST">
+                    @csrf
+                    @method('delete')
+                    <input type="hidden" name="command" value="{{ $command->id }}">
+                    <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                        Cancel
+                    </button>
+                </form>
             </div>
         </div>
         <div class="max-w-5xl mx-auto p-6 bg-white dark:bg-gray-800 shadow rounded-2xl ">
@@ -96,8 +101,7 @@
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 Country
                             </label>
-                            <select name="country"
-                                    class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer">
+                            <select name="country" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer">
                                 <option value="AU">Australia</option>
                                 <option value="BE">Belgium</option>
                                 <option value="BR">Brazil</option>
@@ -127,7 +131,7 @@
                 </section>
                 <br>
                 <input type="hidden" name="finalAmount" value="{{ $total_price }}">
-                <button type="submit" class="px-4 py-3 rounded-full bg-pink-400 text-white focus:outline-none w-full text-xl font-semibold transition-colors">
+                <button type="submit"  class="px-4 py-3 rounded-full bg-blue-800 text-white focus:outline-none w-full text-xl font-semibold transition-colors" @if(is_null($Products)) disabled @endif>
                     Pay ${{ number_format($total_price, 2, ',', ' ') }}
                 </button>
             </form>
@@ -138,32 +142,38 @@
     <div class="col-span-1 bg-white lg:block hidden">
         <h1 class="py-6 border-b-2 text-xl text-gray-600 px-8">Order Summary</h1>
         <ul class="py-6 border-b space-y-6 px-8">
-            @foreach($Products as $Product)
-                <li class="grid grid-cols-6 gap-2 border-b-1">
-                    <div class="col-span-1 self-center">
-                        <img src="{{ url('/storage/' . $Product->product->image) }}" alt="Product" class="rounded w-full">
-                    </div>
-                    <div class="flex flex-col col-span-3 pt-2">
-                        <span class="text-gray-600 text-md font-semi-bold">{{ $Product->product->title }}</span>
-                        <span class="text-gray-400 text-sm inline-block pt-2">{{ $Product->product->subcategory->name }}</span>
-                    </div>
-                    <div class="col-span-2 pt-3">
-                        <div class="flex items-center space-x-2 text-sm justify-between">
-                            <span class="text-gray-400">${{ $Product->quantity }} x ${{ $Product->product->price }}</span>
-                            <span class="text-pink-400 font-semibold inline-block">${{  number_format($Product->quantity * $Product->product->price, 2, ',', ' ') }}</span>
+            @if(!is_null($Products))
+                @foreach($Products as $Product)
+                    <li class="grid grid-cols-6 gap-2 border-b-1">
+                        <div class="col-span-1 self-center">
+                            <img src="{{ url('/storage/' . $Product->product->image) }}" alt="Product" class="rounded w-full">
                         </div>
-                    </div>
+                        <div class="flex flex-col col-span-3 pt-2">
+                            <span class="text-gray-600 text-md font-semi-bold">{{ $Product->product->title }}</span>
+                            <span class="text-gray-400 text-sm inline-block pt-2">{{ $Product->product->subcategory->name }}</span>
+                        </div>
+                        <div class="col-span-2 pt-3">
+                            <div class="flex items-center space-x-2 text-sm justify-between">
+                                <span class="text-gray-400">${{ $Product->quantity }} x ${{ $Product->product->price }}</span>
+                                <span class="text-orange-500 font-semibold inline-block">${{  number_format($Product->quantity * $Product->product->price, 2, ',', ' ') }}</span>
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
+            @else
+                <li class="">
+                    No Products
                 </li>
-            @endforeach
+            @endif
         </ul>
         <div class="px-8 border-b">
             <div class="flex justify-between py-4 text-gray-600">
                 <span>Subtotal</span>
-                <span class="font-semibold text-pink-500">${{ number_format($total_price, 2, ',', ' ') }}</span>
+                <span class="font-semibold text-blue-800">${{ number_format($total_price, 2, ',', ' ') }}</span>
             </div>
             <div class="flex justify-between py-4 text-gray-600">
                 <span>Shipping</span>
-                <span class="font-semibold text-pink-500">Free</span>
+                <span class="font-semibold text-blue-800">Free</span>
             </div>
         </div>
         <div class="font-semibold text-xl px-8 flex justify-between py-8 text-gray-600">
