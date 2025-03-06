@@ -20,7 +20,7 @@ class CommandController extends Controller
 
     public function history(Request $request)
     {
-        $commands = Command::paginate(3);
+        $commands = Command::where('user_id', Auth::id())->paginate(3);
         return view('client.history', compact('commands'));
     }
 

@@ -1,9 +1,8 @@
-<!-- component -->
 <!DOCTYPE html>
 <html class="border-l" lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -28,15 +27,15 @@
 <body>
 
 <div class="h-screen grid grid-cols-3">
-    <div class="lg:col-span-2 col-span-3 bg-indigo-50 space-y-8 px-12">
+    <div class="lg:col-span-2 col-span-3 bg-gray-100 space-y-8 px-12">
         <div class="mt-8 p-4 relative flex flex-col sm:flex-row sm:items-center bg-white shadow rounded-md">
             <div class="flex flex-row items-center border-b sm:border-b-0 w-full sm:w-auto pb-4 sm:pb-0">
-                <div class="text-yellow-500">
+                <div class="text-green-600">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 sm:w-5 h-6 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
-                <div class="text-sm font-medium ml-3">Checkout</div>
+                <div class="text-sm font-medium ml-3 text-gray-900">Checkout</div>
             </div>
             <div class="text-sm tracking-wide text-gray-500 mt-4 sm:mt-0 sm:ml-4">Complete your shipping details below.</div>
             <div class="absolute sm:relative sm:top-auto sm:right-auto ml-auto right-4 top-4 text-gray-400 hover:text-gray-800 cursor-pointer">
@@ -54,7 +53,7 @@
             <form id="payment-form" method="POST" action="/pay">
                 @csrf
                 <section>
-                    <h2 class="uppercase tracking-widest text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">
+                    <h2 class="uppercase tracking-widest text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">
                         Shipping Information
                     </h2>
                     <fieldset class="space-y-6">
@@ -63,9 +62,9 @@
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 Street Address
                             </label>
-                            <input type="text" name="billing_address"
-                                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                                   placeholder="123 Main St">
+                            <input type="text" name="address"
+                                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 ease-in-out"
+                                   placeholder="123 Main St" value="{{ Auth::user()->address->address }}">
                         </div>
 
                         <!-- City, State, ZIP -->
@@ -74,25 +73,25 @@
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     City
                                 </label>
-                                <input type="text" name="billing_city"
-                                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                                       placeholder="City">
+                                <input type="text" name="city"
+                                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 ease-in-out"
+                                       placeholder="City" value="{{ Auth::user()->address->city }}">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     State
                                 </label>
-                                <input type="text" name="billing_state"
-                                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                                       placeholder="State">
+                                <input type="text" name="state"
+                                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 ease-in-out"
+                                       placeholder="State" value="{{ Auth::user()->address->state }}">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    ZIP Code
+                                    ZIP
                                 </label>
-                                <input type="text" name="billing_zip"
-                                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                                       placeholder="ZIP">
+                                <input type="text"
+                                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 ease-in-out"
+                                       placeholder="ZIP" name="postal_code" value="{{ Auth::user()->address->postal_code }}">
                             </div>
                         </div>
 
@@ -101,43 +100,19 @@
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 Country
                             </label>
-                            <select name="country" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition cursor-pointer">
-                                <option value="AU">Australia</option>
-                                <option value="BE">Belgium</option>
-                                <option value="BR">Brazil</option>
-                                <option value="CA">Canada</option>
-                                <option value="CN">China</option>
-                                <option value="DK">Denmark</option>
-                                <option value="FI">Finland</option>
-                                <option value="FR">France</option>
-                                <option value="DE">Germany</option>
-                                <option value="HK">Hong Kong</option>
-                                <option value="IE">Ireland</option>
-                                <option value="IT">Italy</option>
-                                <option value="JP">Japan</option>
-                                <option value="LU">Luxembourg</option>
-                                <option value="MX">Mexico</option>
-                                <option value="NL">Netherlands</option>
-                                <option value="PL">Poland</option>
-                                <option value="PT">Portugal</option>
-                                <option value="SG">Singapore</option>
-                                <option value="ES">Spain</option>
-                                <option value="TN">Tunisia</option>
-                                <option value="GB">United Kingdom</option>
-                                <option value="US" selected="selected">United States</option>
-                            </select>
+                            <input type="text"
+                                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 ease-in-out"
+                                   placeholder="US" name="country" value="{{ Auth::user()->address->country }}">
                         </div>
                     </fieldset>
                 </section>
                 <br>
                 <input type="hidden" name="finalAmount" value="{{ $total_price }}">
-                <button type="submit"  class="px-4 py-3 rounded-full bg-blue-800 text-white focus:outline-none w-full text-xl font-semibold transition-colors" @if(is_null($Products)) disabled @endif>
+                <button type="submit" class="px-4 py-3 rounded-full bg-green-600 text-white focus:outline-none w-full text-xl font-semibold transition duration-300 ease-in-out hover:bg-green-500" @if(is_null($Products)) disabled @endif>
                     Pay ${{ number_format($total_price, 2, ',', ' ') }}
                 </button>
             </form>
         </div>
-
-
     </div>
     <div class="col-span-1 bg-white lg:block hidden">
         <h1 class="py-6 border-b-2 text-xl text-gray-600 px-8">Order Summary</h1>
@@ -169,16 +144,16 @@
         <div class="px-8 border-b">
             <div class="flex justify-between py-4 text-gray-600">
                 <span>Subtotal</span>
-                <span class="font-semibold text-blue-800">${{ number_format($total_price, 2, ',', ' ') }}</span>
+                <span class="font-semibold text-green-600">${{ number_format($total_price, 2, ',', ' ') }}</span>
             </div>
             <div class="flex justify-between py-4 text-gray-600">
                 <span>Shipping</span>
-                <span class="font-semibold text-blue-800">Free</span>
+                <span class="font-semibold text-green-600">Free</span>
             </div>
         </div>
         <div class="font-semibold text-xl px-8 flex justify-between py-8 text-gray-600">
             <span>Total</span>
-            <span>${{ number_format($total_price, 2, ',', ' ') }}</span>
+            <span class="text-green-600">${{ number_format($total_price, 2, ',', ' ') }}</span>
         </div>
     </div>
 </div>
