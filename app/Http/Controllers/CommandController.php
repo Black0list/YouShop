@@ -53,8 +53,6 @@ class CommandController extends Controller
 
         $Products = CommandProduct::where('command_id', $command->id)->get();
 
-        echo "<script>localStorage.clear();</script>";
-
         return view('client.commands', compact('Products', 'command', 'total_price'));
     }
 

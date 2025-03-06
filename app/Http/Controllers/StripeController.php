@@ -31,14 +31,19 @@ class StripeController extends Controller
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        Stripe\Charge::create ([
-            "amount" => $request['balance'] * 100,
-            "currency" => "usd",
-            "source" => $request->stripeToken,
-            "description" => ""
-        ]);
+        try {
+            Stripe\Charge::create ([
+                "amount" => $request['balance'] * 100,
+                "currency" => "usd",
+                "source" => $request->stripeToken,
+                "description" => ""
+            ]);
 
-        return  view('client.success');
+            echo "<script>localStorage.clear();</script>";
+            return  view('client.success');
+        } catch (Stripe\Exception\CardException $e) {
+            echo $e->getMessage();
+        }
 
     }
 }

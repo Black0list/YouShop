@@ -215,7 +215,7 @@
                             <h3>
                               <a href="#">${data['products'][i].title}</a>
                             </h3>
-                            <p class="ml-4">$${data['products'][i].price} x${data['products'][i].quantity}</p>
+                            <p class="ml-4">$${data['products'][i].price} x ${data['products'][i].quantity}</p>
                           </div>
                         </div>
                         <div class="flex flex-1 items-end justify-between text-sm">
