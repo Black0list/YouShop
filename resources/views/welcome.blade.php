@@ -163,7 +163,7 @@
 </div>
 
 
-<!-- Contenu principal -->
+
 <div class="container mx-auto px-6 py-12">
     <h1 class="text-3xl font-bold text-gray-800">@yield('title')</h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -172,7 +172,6 @@
     <div>@yield('view')</div>
 </div>
 
-<!-- Script JS -->
 <script>
     document.getElementById("cartButton").addEventListener("click", function (event) {
         event.preventDefault();
