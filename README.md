@@ -86,3 +86,36 @@ php artisan serve
 - Suivi du statut des paiements pour l'admin
 
 
+## SCREENSHOTS :
+### - DASHBOARD :
+![DASHBOARD](Conception/images/dashboard.png)
+
+### - STORE :
+![STORE](Conception/images/store.png)
+
+### - PRODUCT_VIEW :
+![DASHBOARD](Conception/images/product_view.png)
+
+### - CART :
+![DASHBOARD](Conception/images/cart.png)
+
+### - CHECKOUT :
+![DASHBOARD](Conception/images/ordering.png)
+
+### - STRIPE :
+![DASHBOARD](Conception/images/stripe.png)
+
+### - ORDERS :
+![DASHBOARD](Conception/images/orders.png)
+
+### - ORDER_DETAILS :
+![DASHBOARD](Conception/images/ordered_products.png)
+
+## 👨‍💻 Auteur
+
+Ce projet a été développé par **HADOUI ABDELKEBIR** (**Black0list**).  
+N'hésitez pas à me suivre sur GitHub et à contribuer ! 🚀
+
+📧 Contact : hadoui.abdelkebir@example.com  
+🔗 GitHub : [Black0list](https://github.com/Black0list)  
+
