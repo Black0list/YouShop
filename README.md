@@ -88,28 +88,28 @@ php artisan serve
 
 ## SCREENSHOTS :
 ### - DASHBOARD :
-![DASHBOARD](Conception/images/dashboard.png)
+![DASHBOARD](./Conception/images/dashboard.png)
 
 ### - STORE :
-![STORE](Conception/images/store.png)
+![STORE](./Conception/images/store.png)
 
 ### - PRODUCT_VIEW :
-![DASHBOARD](Conception/images/product_view.png)
+![DASHBOARD](./Conception/images/product_view.png)
 
 ### - CART :
-![DASHBOARD](Conception/images/cart.png)
+![DASHBOARD](./Conception/images/cart.png)
 
 ### - CHECKOUT :
-![DASHBOARD](Conception/images/ordering.png)
+![DASHBOARD](./Conception/images/ordering.png)
 
 ### - STRIPE :
-![DASHBOARD](Conception/images/stripe.png)
+![DASHBOARD](./Conception/images/stripe.png)
 
 ### - ORDERS :
-![DASHBOARD](Conception/images/orders.png)
+![DASHBOARD](./Conception/images/orders.png)
 
 ### - ORDER_DETAILS :
-![DASHBOARD](Conception/images/ordered_products.png)
+![DASHBOARD](./Conception/images/ordered_products.png)
 
 ## 👨‍💻 Auteur
 
