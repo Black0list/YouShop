@@ -91,28 +91,28 @@ php artisan serve
 
 ## SCREENSHOTS :
 ### - DASHBOARD :
-![DASHBOARD](https://github.com/Black0list/YouShop/blob/master/images/dashboard.png?raw=true)
+![DASHBOARD](https://github.com/Black0list/YouShop/blob/master/Conception/Images/dashboard.png?raw=true)
 
 ### - STORE :
-![STORE](https://github.com/Black0list/YouShop/blob/master/images/store.png?raw=true)
+![STORE](https://github.com/Black0list/YouShop/blob/master/Conception/Images/store.png?raw=true)
 
 ### - PRODUCT_VIEW :
-![PRODUCT_VIEW](https://github.com/Black0list/YouShop/blob/master/images/product_view.png?raw=true)
+![PRODUCT_VIEW](https://github.com/Black0list/YouShop/blob/master/Conception/Images/product_view.png?raw=true)
 
 ### - CART :
-![CART](https://github.com/Black0list/YouShop/blob/master/images/cart.png?raw=true)
+![CART](https://github.com/Black0list/YouShop/blob/master/Conception/Images/cart.png?raw=true)
 
 ### - CHECKOUT :
-![CHECKOUT](https://github.com/Black0list/YouShop/blob/master/images/ordering.png?raw=true)
+![CHECKOUT](https://github.com/Black0list/YouShop/blob/master/Conception/Images/ordering.png?raw=true)
 
 ### - STRIPE :
-![STRIPE](https://github.com/Black0list/YouShop/blob/master/images/stripe.png?raw=true)
+![STRIPE](https://github.com/Black0list/YouShop/blob/master/Conception/Images/stripe.png?raw=true)
 
 ### - ORDERS :
-![ORDERS](https://github.com/Black0list/YouShop/blob/master/images/orders.png?raw=true)
+![ORDERS](https://github.com/Black0list/YouShop/blob/master/Conception/Images/orders.png?raw=true)
 
 ### - ORDER_DETAILS :
-![ORDER_DETAILS](https://github.com/Black0list/YouShop/blob/master/images/ordered_products.png?raw=true)
+![ORDER_DETAILS](https://github.com/Black0list/YouShop/blob/master/Conception/Images/ordered_products.png?raw=true)
 
 ## 👨‍💻 Auteur
 
