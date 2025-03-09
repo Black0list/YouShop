@@ -88,28 +88,28 @@ php artisan serve
 
 ## SCREENSHOTS :
 ### - DASHBOARD :
-![DASHBOARD](./Conception/images/dashboard.png)
+![DASHBOARD](https://raw.githubusercontent.com/Black0list/YouShop/main/images/dashboard.png)
 
 ### - STORE :
-![STORE](./Conception/images/store.png)
+![STORE](https://raw.githubusercontent.com/Black0list/YouShop/main/images/store.png)
 
 ### - PRODUCT_VIEW :
-![DASHBOARD](./Conception/images/product_view.png)
+![DASHBOARD](https://raw.githubusercontent.com/Black0list/YouShop/main/images/product_view.png)
 
 ### - CART :
-![DASHBOARD](./Conception/images/cart.png)
+![DASHBOARD](https://raw.githubusercontent.com/Black0list/YouShop/main/images/cart.png)
 
 ### - CHECKOUT :
-![DASHBOARD](./Conception/images/ordering.png)
+![DASHBOARD](https://raw.githubusercontent.com/Black0list/YouShop/main/images/ordering.png)
 
 ### - STRIPE :
-![DASHBOARD](./Conception/images/stripe.png)
+![DASHBOARD](https://raw.githubusercontent.com/Black0list/YouShop/main/images/stripe.png)
 
 ### - ORDERS :
-![DASHBOARD](./Conception/images/orders.png)
+![DASHBOARD](https://raw.githubusercontent.com/Black0list/YouShop/main/images/orders.png)
 
 ### - ORDER_DETAILS :
-![DASHBOARD](./Conception/images/ordered_products.png)
+![DASHBOARD](https://raw.githubusercontent.com/Black0list/YouShop/main/images/ordered_products.png)
 
 ## 👨‍💻 Auteur
 
