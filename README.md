@@ -1,3 +1,6 @@
+Here is your modified README with the updated image URLs using the format `https://github.com/Black0list/YouShop/blob/master/image.jpg?raw=true`:
+
+```markdown
 # Projet E-commerce Laravel avec PostgreSQL
 
 Ce projet consiste à développer une application web e-commerce en Laravel avec une base de données PostgreSQL. Il comprend l'authentification, la gestion des rôles, la gestion des produits, l'ajout au panier avec `localStorage` et la gestion des commandes avec paiement en ligne via Stripe.
@@ -26,7 +29,7 @@ npm install && npm run dev
 ```
 
 ### 3. Configurer l'environnement
-Copiez le fichier `.env.example` et renommez-le `.env`.
+Copiez le fichier `.env.example` et renommez-le `.env` :
 ```bash
 cp .env.example .env
 ```
@@ -88,28 +91,28 @@ php artisan serve
 
 ## SCREENSHOTS :
 ### - DASHBOARD :
-![DASHBOARD](https://raw.githubusercontent.com/Black0list/YouShop/master/images/dashboard.png)
+![DASHBOARD](https://github.com/Black0list/YouShop/blob/master/images/dashboard.png?raw=true)
 
 ### - STORE :
-![STORE](https://raw.githubusercontent.com/Black0list/YouShop/master/images/store.png)
+![STORE](https://github.com/Black0list/YouShop/blob/master/images/store.png?raw=true)
 
 ### - PRODUCT_VIEW :
-![PRODUCT_VIEW](https://raw.githubusercontent.com/Black0list/YouShop/master/images/product_view.png)
+![PRODUCT_VIEW](https://github.com/Black0list/YouShop/blob/master/images/product_view.png?raw=true)
 
 ### - CART :
-![CART](https://raw.githubusercontent.com/Black0list/YouShop/master/images/cart.png)
+![CART](https://github.com/Black0list/YouShop/blob/master/images/cart.png?raw=true)
 
 ### - CHECKOUT :
-![CHECKOUT](https://raw.githubusercontent.com/Black0list/YouShop/master/images/ordering.png)
+![CHECKOUT](https://github.com/Black0list/YouShop/blob/master/images/ordering.png?raw=true)
 
 ### - STRIPE :
-![STRIPE](https://raw.githubusercontent.com/Black0list/YouShop/master/images/stripe.png)
+![STRIPE](https://github.com/Black0list/YouShop/blob/master/images/stripe.png?raw=true)
 
 ### - ORDERS :
-![ORDERS](https://raw.githubusercontent.com/Black0list/YouShop/master/images/orders.png)
+![ORDERS](https://github.com/Black0list/YouShop/blob/master/images/orders.png?raw=true)
 
 ### - ORDER_DETAILS :
-![ORDER_DETAILS](https://raw.githubusercontent.com/Black0list/YouShop/master/images/ordered_products.png)
+![ORDER_DETAILS](https://github.com/Black0list/YouShop/blob/master/images/ordered_products.png?raw=true)
 
 ## 👨‍💻 Auteur
 
@@ -117,5 +120,6 @@ Ce projet a été développé par **HADOUI ABDELKEBIR** (**Black0list**).
 N'hésitez pas à me suivre sur GitHub et à contribuer ! 🚀
 
 📧 Contact : hadoui.abdelkebir@example.com  
-🔗 GitHub : [Black0list](https://github.com/Black0list)  
+🔗 GitHub : [Black0list](https://github.com/Black0list)
+```
 
