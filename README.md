@@ -1,6 +1,3 @@
-Here is your modified README with the updated image URLs using the format `https://github.com/Black0list/YouShop/blob/master/image.jpg?raw=true`:
-
-```markdown
 # Projet E-commerce Laravel avec PostgreSQL
 
 Ce projet consiste à développer une application web e-commerce en Laravel avec une base de données PostgreSQL. Il comprend l'authentification, la gestion des rôles, la gestion des produits, l'ajout au panier avec `localStorage` et la gestion des commandes avec paiement en ligne via Stripe.
@@ -29,7 +26,7 @@ npm install && npm run dev
 ```
 
 ### 3. Configurer l'environnement
-Copiez le fichier `.env.example` et renommez-le `.env` :
+Copiez le fichier `.env.example` et renommez-le `.env`.
 ```bash
 cp .env.example .env
 ```
@@ -87,7 +84,6 @@ php artisan serve
 - Intégration de Stripe pour les paiements sécurisés
 - Confirmation de paiement et récapitulatif de commande
 - Suivi du statut des paiements pour l'admin
-
 
 ## SCREENSHOTS :
 ### - DASHBOARD :
