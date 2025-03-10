@@ -115,7 +115,7 @@ php artisan serve
 Ce projet a été développé par **HADOUI ABDELKEBIR** (**Black0list**).  
 N'hésitez pas à me suivre sur GitHub et à contribuer ! 🚀
 
-📧 Contact : hadoui.abdelkebir@example.com  
+📧 Contact : contact.abdelkebir@gmail.com 
 🔗 GitHub : [Black0list](https://github.com/Black0list)
 
 
