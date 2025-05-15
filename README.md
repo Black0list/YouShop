@@ -1,6 +1,3 @@
-Here is your modified README with the updated image URLs using the format `https://github.com/Black0list/YouShop/blob/master/image.jpg?raw=true`:
-
-```markdown
 # Projet E-commerce Laravel avec PostgreSQL
 
 Ce projet consiste à développer une application web e-commerce en Laravel avec une base de données PostgreSQL. Il comprend l'authentification, la gestion des rôles, la gestion des produits, l'ajout au panier avec `localStorage` et la gestion des commandes avec paiement en ligne via Stripe.
@@ -29,7 +26,7 @@ npm install && npm run dev
 ```
 
 ### 3. Configurer l'environnement
-Copiez le fichier `.env.example` et renommez-le `.env` :
+Copiez le fichier `.env.example` et renommez-le `.env`.
 ```bash
 cp .env.example .env
 ```
@@ -89,37 +86,4 @@ php artisan serve
 - Suivi du statut des paiements pour l'admin
 
 
-## SCREENSHOTS :
-### - DASHBOARD :
-![DASHBOARD](https://github.com/Black0list/YouShop/blob/master/Conception/Images/dashboard.png?raw=true)
-
-### - STORE :
-![STORE](https://github.com/Black0list/YouShop/blob/master/Conception/Images/store.png?raw=true)
-
-### - PRODUCT_VIEW :
-![PRODUCT_VIEW](https://github.com/Black0list/YouShop/blob/master/Conception/Images/product_view.png?raw=true)
-
-### - CART :
-![CART](https://github.com/Black0list/YouShop/blob/master/Conception/Images/cart.png?raw=true)
-
-### - CHECKOUT :
-![CHECKOUT](https://github.com/Black0list/YouShop/blob/master/Conception/Images/ordering.png?raw=true)
-
-### - STRIPE :
-![STRIPE](https://github.com/Black0list/YouShop/blob/master/Conception/Images/stripe.png?raw=true)
-
-### - ORDERS :
-![ORDERS](https://github.com/Black0list/YouShop/blob/master/Conception/Images/orders.png?raw=true)
-
-### - ORDER_DETAILS :
-![ORDER_DETAILS](https://github.com/Black0list/YouShop/blob/master/Conception/Images/ordered_products.png?raw=true)
-
-## 👨‍💻 Auteur
-
-Ce projet a été développé par **HADOUI ABDELKEBIR** (**Black0list**).  
-N'hésitez pas à me suivre sur GitHub et à contribuer ! 🚀
-
-📧 Contact : hadoui.abdelkebir@example.com  
-🔗 GitHub : [Black0list](https://github.com/Black0list)
-```
-
+![DASHBOARD](Conception/imagr)

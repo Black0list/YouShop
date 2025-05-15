@@ -11,8 +11,9 @@ class SubCategoryController extends Controller
 {
     public function index()
     {
-        $categories = SubCategory::paginate(7);
-        return view('admin.subcategories', compact('categories'));
+        $subcategories = SubCategory::paginate(7);
+        $categories = Category::all();
+        return view('admin.subcategories', compact('subcategories', 'categories'));
     }
 
     public function create(Request $request)
@@ -23,7 +24,7 @@ class SubCategoryController extends Controller
             'category_id' => $request['category_id'],
         ]);
 
-        return redirect('/admin/categories')->with('success', 'SubCategory created!');
+        return redirect('/admin/subcategories')->with('success', 'SubCategory created!');
     }
 
     public function getOne(Request $request)

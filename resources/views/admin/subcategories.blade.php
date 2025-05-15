@@ -18,7 +18,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="registerForm" method="POST" action="/admin/category/create" novalidate>
+                        <form id="registerForm" method="POST" action="/admin/subcategory/create" novalidate>
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Category Name</label>
@@ -28,6 +28,11 @@
                                 <label for="description" class="form-label">Category Description</label>
                                 <input type="text" class="form-control" name="description" id="description" required>
                             </div>
+                            <select name="category_id">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" id="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
                             <button type="submit" class="btn btn-primary w-100">Create</button>
                         </form>
                     </div>
@@ -49,7 +54,7 @@
                 </tr>
                 </thead>
                 <tbody class="table-light">
-                @foreach($categories as $category)
+                @foreach($subcategories as $category)
                     <tr>
                         <td><strong>{{ $category->name }}</strong></td>
                         <td>{{ $category->description }}</td>
@@ -83,7 +88,7 @@
                 @endforeach
                 </tbody>
             </table>
-            {{ $categories->links() }}
+            {{ $subcategories->links() }}
         </div>
     </div>
 @endsection

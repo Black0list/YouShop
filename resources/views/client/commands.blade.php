@@ -64,7 +64,7 @@
                             </label>
                             <input type="text" name="address"
                                    class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 ease-in-out"
-                                   placeholder="123 Main St" value="{{ Auth::user()->address->address }}">
+{{--                                   placeholder="123 Main St" value="{{ Auth::user()->address->address }}">--}}
                         </div>
 
                         <!-- City, State, ZIP -->
@@ -75,7 +75,7 @@
                                 </label>
                                 <input type="text" name="city"
                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 ease-in-out"
-                                       placeholder="City" value="{{ Auth::user()->address->city }}">
+{{--                                       placeholder="City" value="{{ Auth::user()->address->city }}">--}}
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -83,15 +83,15 @@
                                 </label>
                                 <input type="text" name="state"
                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 ease-in-out"
-                                       placeholder="State" value="{{ Auth::user()->address->state }}">
+{{--                                       placeholder="State" value="{{ Auth::user()->address->state }}">--}}
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     ZIP
                                 </label>
-                                <input type="text"
+                                <input type="number"
                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 ease-in-out"
-                                       placeholder="ZIP" name="postal_code" value="{{ Auth::user()->address->postal_code }}">
+                                       placeholder="ZIP" name="postal_code" value="">
                             </div>
                         </div>
 
@@ -102,7 +102,7 @@
                             </label>
                             <input type="text"
                                    class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 ease-in-out"
-                                   placeholder="US" name="country" value="{{ Auth::user()->address->country }}">
+                                   placeholder="US" name="country" value="">
                         </div>
                     </fieldset>
                 </section>
